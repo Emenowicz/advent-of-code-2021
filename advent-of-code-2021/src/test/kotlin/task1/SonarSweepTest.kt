@@ -12,7 +12,7 @@ internal class SonarSweepTest {
         //given
         val expectedResult = 7
         //when
-        val result = sonarSweep.calculateDepth("/testInput.txt");
+        val result = sonarSweep.calculatePart1("/testInput.txt");
         //then
         assertEquals(expectedResult, result)
     }
