@@ -9,7 +9,7 @@ class SonarSweep : Problem {
         println("Part 1: " + calculatePart1("/task1/input/input.txt"))
     }
 
-    fun calculatePart1(fileName: String): Int {
+    private fun calculatePart1(fileName: String): Int {
         val measurements = FileReader.readFileAsList(fileName)
         return measurements
             .map { it.toInt() }
