@@ -4,6 +4,7 @@ import task0.Problem
 import task0.Unknown
 import task1.SonarSweep
 import task2.Dive
+import task3.BinaryDiagnostic
 
 class Menu {
     companion object {
@@ -18,6 +19,7 @@ class Menu {
                     val problem: Problem = when (selection?.toInt() ?: 0) {
                         1 -> SonarSweep()
                         2 -> Dive()
+                        3 -> BinaryDiagnostic()
                         else -> Unknown()
                     }
                     printSolution(problem)
@@ -36,6 +38,7 @@ class Menu {
             println("Select problem to solve by writing its number:")
             println("1. Sonar Sweep")
             println("2. Dive")
+            println("3. Binary Diagnostic")
 
             println("Write 'exit' to finish")
         }
