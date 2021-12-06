@@ -1,23 +1,21 @@
 package task1
 
 import task0.Problem
-import utils.FileReader
 
 class SonarSweep : Problem {
 
     override fun printSolution() {
-        println("Part 1: " + calculatePart1("/task1/part1/input.txt"))
-        println("Part 2: " + calculatePart2("/task1/part2/input.txt"))
+        println("Part 1: " + calculatePart1(getInputData("/task1/part1/input.txt")))
+        println("Part 2: " + calculatePart2(getInputData("/task1/part2/input.txt")))
     }
 
-    fun calculatePart1(fileName: String): Int {
-        val measurements = FileReader.readFileAsList(fileName).map { it.toInt() }
-        return findCountOfBiggerThanPredecessor(measurements)
+    fun calculatePart1(data: List<String>): Int {
+        return findCountOfBiggerThanPredecessor(data.map { it.toInt() })
     }
 
-    fun calculatePart2(fileName: String): Int {
-        val measurements = FileReader.readFileAsList(fileName)
-        return findCountOfBiggerThanPredecessor(measurements.map { it.toInt() }.windowed(3).map { window -> window.sum() })
+    fun calculatePart2(data: List<String>): Int {
+        return findCountOfBiggerThanPredecessor(
+            data.map { it.toInt() }.windowed(3).map { window -> window.sum() })
     }
 
     private fun findCountOfBiggerThanPredecessor(measurements: List<Int>): Int {

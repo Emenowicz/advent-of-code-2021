@@ -3,28 +3,28 @@ package task1
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-private const val _TEST_INPUT_TXT = "/testInput.txt"
+private const val _TEST_INPUT_TXT = "/task1/testInput.txt"
 
 internal class SonarSweepTest {
 
     private val sonarSweep: SonarSweep = SonarSweep()
 
     @Test
-    fun testSonarSweepPart1() {
+    fun testPart1() {
         //given
         val expectedResult = 7
         //when
-        val result = sonarSweep.calculatePart1(_TEST_INPUT_TXT);
+        val result = sonarSweep.calculatePart1(sonarSweep.getInputData(_TEST_INPUT_TXT));
         //then
         assertEquals(expectedResult, result)
     }
 
     @Test
-    fun testSonarSweepPart2() {
+    fun testPart2() {
         //given
         val expectedResult = 5
         //when
-        val result = sonarSweep.calculatePart2(_TEST_INPUT_TXT)
+        val result = sonarSweep.calculatePart2(sonarSweep.getInputData(_TEST_INPUT_TXT))
         //then
         assertEquals(expectedResult,result)
     }

@@ -3,6 +3,7 @@ package menu
 import task0.Problem
 import task0.Unknown
 import task1.SonarSweep
+import task2.Dive
 
 class Menu {
     companion object {
@@ -16,6 +17,7 @@ class Menu {
                 if (!selection.equals("exit", true)) {
                     val problem: Problem = when (selection?.toInt() ?: 0) {
                         1 -> SonarSweep()
+                        2 -> Dive()
                         else -> Unknown()
                     }
                     printSolution(problem)
@@ -33,19 +35,20 @@ class Menu {
         private fun printMenu() {
             println("Select problem to solve by writing its number:")
             println("1. Sonar Sweep")
+            println("2. Dive")
 
             println("Write 'exit' to finish")
         }
 
 
         private fun printSolution(problem: Problem) {
-            print("Solution is: ")
+            println("Solution: ")
             problem.printSolution()
-            print("\n\n")
+            println()
         }
 
         private fun printGoodbye(){
-            print("Thanks, bye!")
+            println("Thanks, bye!")
         }
     }
 }
