@@ -14,4 +14,14 @@ private val binaryDiagnostic = BinaryDiagnostic()
         //then
         assertEquals(expectedResult, result)
     }
+
+    @Test
+    fun testPart2() {
+        //given
+        val expectedResult = 230
+        //when
+        val result = binaryDiagnostic.calculatePart2(binaryDiagnostic.getInputData("/task3/testInput.txt"))
+        //then
+        assertEquals(expectedResult, result)
+    }
 }
