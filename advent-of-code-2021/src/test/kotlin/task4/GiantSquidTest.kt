@@ -16,13 +16,13 @@ internal class GiantSquidTest {
         assertEquals(expectedResult, result)
     }
 
-//    @Test
-//    fun testPart2() {
-//        //given
-//        val expectedResult = 230
-//        //when
-//        val result = giantSquid.calculatePart2(giantSquid.getInputData("/task4/testInput.txt"))
-//        //then
-//        assertEquals(expectedResult, result)
-//    }
+    @Test
+    fun testPart2() {
+        //given
+        val expectedResult = 1924
+        //when
+        val result = giantSquid.calculatePart2(giantSquid.getInputData("/task4/testInput.txt"))
+        //then
+        assertEquals(expectedResult, result)
+    }
 }

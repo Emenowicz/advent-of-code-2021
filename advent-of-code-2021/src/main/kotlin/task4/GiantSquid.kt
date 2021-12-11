@@ -6,12 +6,15 @@ import utils.MatrixUtils
 private const val DOUBLE_SPACE = "  "
 private const val SPACE = " "
 
+private const val COMMA = ","
+
 class GiantSquid : Problem {
     var winningSum = 0
+    var indexesWon = ArrayList<Int>()
 
     override fun printSolution() {
         println("Part 1: " + calculatePart1(getInputData("/task4/part1/input.txt")))
-//        println("Part 2: " + calculatePart2(getInputData("/task4/part2/input.txt")))
+        println("Part 2: " + calculatePart2(getInputData("/task4/part2/input.txt")))
     }
 
     fun calculatePart1(data: List<String>): Int {
@@ -32,9 +35,45 @@ class GiantSquid : Problem {
         return 0
     }
 
-    private fun checkWinner(matrixesList: List<Array<Array<Int>>>, numbersCalled: ArrayList<Int>) {
-        matrixesList.forEachIndexed { index, matrix ->
+    fun calculatePart2(data: List<String>): Int {
+        val numbers = getNumbers(data)
+        val matrixesList = parseData(data.subList(2, data.size))
 
+        val numbersCalled = ArrayList<Int>()
+
+
+        numbers.forEach { number ->
+            numbersCalled.add(number)
+            checkLastWinner(matrixesList, numbersCalled)
+            if (winningSum > 0) {
+                return winningSum
+            }
+        }
+
+        return 0
+    }
+
+    private fun checkLastWinner(matrixesList: List<Array<Array<Int>>>, numbersCalled: ArrayList<Int>) {
+        matrixesList.forEachIndexed { index, matrix ->
+            if (!indexesWon.contains(index)) {
+                val transposedMatrix = MatrixUtils.transposeIntMatrix(matrix)
+                matrix.plus(transposedMatrix).forEach { row ->
+                    if (row.all { number -> numbersCalled.contains(number) }) {
+                        indexesWon.add(index)
+                        winningSum = matrix.flatten().filter { number -> !numbersCalled.contains(number) }
+                            .sum() * numbersCalled.last()
+                        return@forEachIndexed
+                    }
+                }
+            }
+        }
+        if (indexesWon.size != matrixesList.size) {
+            winningSum = 0
+        }
+    }
+
+    private fun checkWinner(matrixesList: List<Array<Array<Int>>>, numbersCalled: ArrayList<Int>) {
+        matrixesList.forEach { matrix ->
             val transposedMatrix = MatrixUtils.transposeIntMatrix(matrix)
             matrix.plus(transposedMatrix).forEach { row ->
                 if (row.all { number -> numbersCalled.contains(number) }) {
@@ -47,7 +86,7 @@ class GiantSquid : Problem {
     }
 
     private fun getNumbers(data: List<String>): List<Int> {
-        return data[0].split(",").map { number -> number.toInt() }
+        return data[0].split(COMMA).map { number -> number.toInt() }
     }
 
     private fun parseData(data: List<String>): List<Array<Array<Int>>> {
