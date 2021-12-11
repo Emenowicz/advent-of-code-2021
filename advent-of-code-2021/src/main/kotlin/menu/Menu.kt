@@ -5,6 +5,7 @@ import task0.Unknown
 import task1.SonarSweep
 import task2.Dive
 import task3.BinaryDiagnostic
+import task4.GiantSquid
 
 class Menu {
     companion object {
@@ -20,6 +21,7 @@ class Menu {
                         1 -> SonarSweep()
                         2 -> Dive()
                         3 -> BinaryDiagnostic()
+                        4 -> GiantSquid()
                         else -> Unknown()
                     }
                     printSolution(problem)
@@ -39,6 +41,7 @@ class Menu {
             println("1. Sonar Sweep")
             println("2. Dive")
             println("3. Binary Diagnostic")
+            println("4. Giant Squid")
 
             println("Write 'exit' to finish")
         }

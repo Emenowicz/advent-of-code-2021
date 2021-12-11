@@ -1,6 +1,7 @@
 package task3
 
 import task0.Problem
+import utils.MatrixUtils
 
 class BinaryDiagnostic : Problem {
     override fun printSolution() {
@@ -14,7 +15,7 @@ class BinaryDiagnostic : Problem {
         val gammaRateBitsList = ArrayList<String>()
         val epsilonRateBitsList = ArrayList<String>()
 
-        val transposedMatrix = transposeMatrix(matrix)
+        val transposedMatrix = MatrixUtils.transposeCharMatrix(matrix)
 
         transposedMatrix.forEach { row ->
             val bitsCounted = row.groupingBy { it }.eachCount()
@@ -34,7 +35,7 @@ class BinaryDiagnostic : Problem {
     fun calculatePart2(data: List<String>): Int {
 
         val matrix = data.map { it -> it.toList() }
-        val transposedMatrix = transposeMatrix(matrix)
+        val transposedMatrix = MatrixUtils.transposeCharMatrix(matrix)
 
         val ignoredMaxIndices = HashSet<Int>()
         val ignoredMinIndices = HashSet<Int>()
@@ -45,7 +46,8 @@ class BinaryDiagnostic : Problem {
             val bitsCountedFilteredByMinIndices =
                 row.filterIndexed { index, _ -> !ignoredMinIndices.contains(index) }.groupingBy { it }.eachCount()
 
-            val maxBit = bitsCountedFilteredByMaxIndices.toSortedMap(Comparator.reverseOrder()).maxByOrNull { it.value }?.key
+            val maxBit =
+                bitsCountedFilteredByMaxIndices.toSortedMap(Comparator.reverseOrder()).maxByOrNull { it.value }?.key
             val minBit = bitsCountedFilteredByMinIndices.toSortedMap().minByOrNull { it.value }?.key
             row.forEachIndexed { index, s ->
                 if (s != maxBit) {
@@ -63,13 +65,5 @@ class BinaryDiagnostic : Problem {
         return oxygenGenerationRating * co2ScrubberRating
     }
 
-    private fun transposeMatrix(matrix: List<List<Char>>): Array<Array<String>> {
-        val rows = matrix.size
-        val columns = matrix[0].size
-        val transposedMatrix = Array(columns) { Array(rows) { "it = $it" } }
-        for (i in 0 until rows) {
-            for (j in 0 until columns) transposedMatrix[j][i] = matrix[i][j].toString()
-        }
-        return transposedMatrix
-    }
+
 }
